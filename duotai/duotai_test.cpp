@@ -9,8 +9,11 @@ class person {
 		int age;
 		string name;
 	public:
-	person(int age,string name){
+	person(){
 		cout << "person()" << endl;
+	}
+	person(int age,string name){
+		cout << "person(int ,string)" << endl;
 		this->age = age;
 		this->name = name;
 	}
@@ -32,16 +35,18 @@ class student : public person{
 		int age;
 		string name;
 	public:
-#if 1
 	student(int age,string name){
-		cout << "student()" << endl;
+		cout << "student(int , string)" << endl;
 		this->age = age;
 		this->name = name;
 	}
-	~student(){
-		cout << "student()" << endl;
+	/*提供有参数的构造函数之后，系统不再提供无参数的构造函数，需要自己提供*/
+	student(){
+		cout << "sdudent()" << endl;
 	}
-#endif
+	~student(){
+		cout << "~student()" << endl;
+	}
 		int getAge(){
 		cout << "student() getAge" << endl;
 		return this->age;
@@ -53,8 +58,15 @@ class student : public person{
 };
 int main(){
     student p(100,"liug");
+    person per(10,"gang");
+    cout << "-----------------------------" << endl;
     person * p1 = &p;
     p1->getAge();
-//    student *p2 = &p;
- //   p2->getName();	
+    cout << "-----------------------------" << endl;
+   //基类的指针不能转化成子类的指针； 
+    student *p2 = &per;
+    p2->getName();
+    cout << "-----------------------------" << endl;
+    return 0;
 }
+
